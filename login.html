@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Banking Login</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .header {
+        background-color: #003366;
+        color: white;
+        padding: 15px 0;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+      }
+
+      .main {
+        display: flex;
+        min-height: 80vh;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .login-wrapper {
+        display: flex;
+        width: 100%;
+        max-width: 800px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .image-container {
+        flex: 1;
+        background-color: #003366;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .login-container {
+        flex: 1;
+        padding: 30px;
+      }
+
+      .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .login-header h2 {
+        color: #003366;
+        margin-bottom: 10px;
+      }
+
+      .login-header p {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #444;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: #003366;
+        box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.2);
+      }
+
+      .btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #003366;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #002244;
+      }
+
+      .forgot-password {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .forgot-password a {
+        color: #003366;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .forgot-password a:hover {
+        text-decoration: underline;
+      }
+
+      .security-info {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+        text-align: center;
+      }
+
+      .security-info p {
+        font-size: 13px;
+        color: #777;
+        margin-bottom: 10px;
+      }
+
+      .security-badge {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+      }
+
+      .badge {
+        width: 70px;
+        height: 40px;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+        color: #555;
+      }
+
+      .footer {
+        background-color: #f0f0f0;
+        padding: 15px 0;
+        text-align: center;
+        font-size: 13px;
+        color: #666;
+        margin-top: 40px;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .login-wrapper {
+          flex-direction: column;
+          max-width: 400px;
+        }
+
+        .image-container {
+          padding: 20px;
+          min-height: 180px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <a href="#" class="logo">SecureBank</a>
+          <div>
+            <span style="font-size: 14px"
+              >Customer Service: 1-800-555-0123</span
+            >
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <div class="login-wrapper">
+          <div class="image-container">
+            <img
+              src="/api/placeholder/320/400"
+              alt="Secure Banking"
+              style="max-width: 100%; height: auto; border-radius: 4px"
+            />
+          </div>
+
+          <div class="login-container">
+            <div class="login-header">
+              <h2>Online Banking Login</h2>
+              <p>Access your accounts securely</p>
+            </div>
+
+            <form action="#" method="post">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  class="form-control"
+                  autocomplete="off"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn">Log In</button>
+              </div>
+            </form>
+
+            <div class="forgot-password">
+              <a href="#">Forgot Username/Password?</a> |
+              <a href="#">Register</a>
+            </div>
+
+            <div class="security-info">
+              <p>Your connection to this site is secure and encrypted</p>
+              <p>
+                We never share your personal information without your permission
+              </p>
+              <div class="security-badge">
+                <div class="badge">SECURE</div>
+                <div class="badge">VERIFIED</div>
+                <div class="badge">TRUSTED</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>
+          &copy; 2025 SecureBank. All rights reserved. |
+          <a href="#" style="color: #003366">Privacy Policy</a> |
+          <a href="#" style="color: #003366">Terms of Service</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
