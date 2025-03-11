@@ -1,0 +1,25 @@
+Subject: URGENT: Security Alert - Immediate Action Required
+
+Dear Valued Customer,
+
+We have detected unusual activity on your account that requires your immediate attention. Our security system has identified several login attempts from an unrecognized device.
+
+For your protection, we have temporarily limited access to your online banking services. To restore full account access, please verify your identity by following these steps:
+
+1. Click on the secure link below to access our verification portal:
+   [Secure Account Verification]
+
+2. Confirm your personal information and account details
+3. Update your security preferences
+
+This process will take approximately 2-3 minutes to complete. Failure to verify your account within 24 hours may result in a temporary suspension of your online banking access.
+
+NOTE: This is an automated security measure and requires your prompt attention.
+
+If you have any questions, please contact our customer service at 1-800-XXX-XXXX.
+
+Thank you for your cooperation and for banking with us.
+
+Sincerely,
+Security Department
+National Banking Services

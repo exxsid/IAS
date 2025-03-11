@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PhishGuard: Email Phishing Awareness</title>
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #0f172a;
+        --danger: #dc2626;
+        --success: #16a34a;
+        --warning: #ca8a04;
+        --gray-light: #f1f5f9;
+        --gray: #94a3b8;
+        --white: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: var(--secondary);
+        background-color: var(--gray-light);
+      }
+
+      header {
+        background-color: var(--primary);
+        color: var(--white);
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo span {
+        margin-left: 0.5rem;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 1.5rem;
+      }
+
+      .nav-links a {
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .hero {
+        background-color: var(--primary-dark);
+        color: var(--white);
+        padding: 4rem 0;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .btn-primary {
+        background-color: var(--white);
+        color: var(--primary);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--gray-light);
+      }
+
+      .features {
+        padding: 4rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+        color: var(--secondary);
+        position: relative;
+        display: inline-block;
+        padding-bottom: 0.5rem;
+      }
+
+      .section-title h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: var(--primary);
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background-color: var(--white);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-img {
+        height: 200px;
+        background-color: var(--gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        font-size: 4rem;
+      }
+
+      .feature-content {
+        padding: 1.5rem;
+      }
+
+      .feature-content h3 {
+        margin-bottom: 0.5rem;
+        color: var(--secondary);
+      }
+
+      .examples {
+        padding: 4rem 0;
+        background-color: var(--white);
+      }
+
+      .example-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .example-card {
+        border: 1px solid var(--gray);
+        border-radius: 0.5rem;
+        overflow: hidden;
+      }
+
+      .example-header {
+        padding: 1rem;
+        background-color: var(--gray-light);
+        border-bottom: 1px solid var(--gray);
+      }
+
+      .email-example {
+        padding: 1.5rem;
+        position: relative;
+      }
+
+      .highlight {
+        background-color: rgba(220, 38, 38, 0.1);
+        border: 1px solid var(--danger);
+        border-radius: 0.25rem;
+        padding: 0.25rem;
+      }
+
+      .annotation {
+        position: absolute;
+        background-color: var(--danger);
+        color: var(--white);
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        max-width: 200px;
+      }
+
+      .annotation::before {
+        content: "";
+        position: absolute;
+        border: 8px solid transparent;
+      }
+
+      .annotation-1 {
+        top: 60px;
+        right: 20px;
+      }
+
+      .annotation-1::before {
+        border-right-color: var(--danger);
+        left: -16px;
+        top: 10px;
+      }
+
+      .annotation-2 {
+        top: 180px;
+        right: 20px;
+      }
+
+      .annotation-2::before {
+        border-right-color: var(--danger);
+        left: -16px;
+        top: 10px;
+      }
+
+      .tips {
+        padding: 4rem 0;
+      }
+
+      .tips-list {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .tip-item {
+        display: flex;
+        margin-bottom: 1.5rem;
+        background-color: var(--white);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .tip-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        background-color: var(--primary);
+        color: var(--white);
+        font-size: 1.5rem;
+      }
+
+      .tip-content {
+        padding: 1.5rem;
+        flex: 1;
+      }
+
+      .tip-content h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+      }
+
+      .quiz {
+        padding: 4rem 0;
+        background-color: var(--white);
+      }
+
+      .quiz-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .quiz-question {
+        margin-bottom: 2rem;
+      }
+
+      .quiz-options {
+        list-style: none;
+        margin-top: 1rem;
+      }
+
+      .quiz-option {
+        padding: 1rem;
+        border: 1px solid var(--gray);
+        border-radius: 0.25rem;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .quiz-option:hover {
+        background-color: var(--gray-light);
+      }
+
+      .quiz-option.correct {
+        background-color: rgba(22, 163, 74, 0.1);
+        border-color: var(--success);
+      }
+
+      .quiz-option.incorrect {
+        background-color: rgba(220, 38, 38, 0.1);
+        border-color: var(--danger);
+      }
+
+      .quiz-feedback {
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 0.25rem;
+        display: none;
+      }
+
+      .quiz-feedback.correct {
+        background-color: rgba(22, 163, 74, 0.1);
+        border: 1px solid var(--success);
+        color: var(--success);
+        display: block;
+      }
+
+      .quiz-feedback.incorrect {
+        background-color: rgba(220, 38, 38, 0.1);
+        border: 1px solid var(--danger);
+        color: var(--danger);
+        display: block;
+      }
+
+      footer {
+        background-color: var(--secondary);
+        color: var(--white);
+        padding: 2rem 0;
+        text-align: center;
+      }
+
+      .footer-links {
+        margin-bottom: 1rem;
+      }
+
+      .footer-links a {
+        color: var(--gray);
+        text-decoration: none;
+        margin: 0 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .annotation {
+          position: static;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        .annotation::before {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <div class="logo">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            <span>PhishGuard</span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#examples">Examples</a></li>
+            <li><a href="#tips">Safety Tips</a></li>
+            <li><a href="#quiz">Test Yourself</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <h1>Protect Yourself from Email Phishing Attacks</h1>
+        <p>
+          Learn how to identify and avoid email phishing attempts that could
+          compromise your personal information and online security.
+        </p>
+        <a href="#features" class="btn btn-primary">Get Started</a>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>What is Phishing?</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-img">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="64"
+                height="64"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Email Deception</h3>
+              <p>
+                Phishing emails impersonate trusted entities like banks, social
+                media platforms, or colleagues to trick you into revealing
+                sensitive information.
+              </p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-img">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="64"
+                height="64"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Credential Theft</h3>
+              <p>
+                The goal is often to steal your usernames, passwords, credit
+                card details, or other personal information that can be used for
+                identity theft.
+              </p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-img">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="64"
+                height="64"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3>Protection Strategies</h3>
+              <p>
+                Learning to recognize phishing attempts is your first line of
+                defense against these increasingly sophisticated cyber attacks.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="examples" class="examples">
+      <div class="container">
+        <div class="section-title">
+          <h2>Phishing Email Examples</h2>
+        </div>
+        <div class="example-grid">
+          <div class="example-card">
+            <div class="example-header">
+              <h3>Bank Security Alert Example</h3>
+            </div>
+            <div class="email-example">
+              <p>
+                <strong>From:</strong>
+                <span class="highlight"
+                  >security-alert@nationaIbankservice.com</span
+                >
+              </p>
+              <p>
+                <strong>Subject:</strong>
+                <span class="highlight"
+                  >URGENT: Security Alert - Immediate Action Required</span
+                >
+              </p>
+              <p><strong>Date:</strong> March 11, 2025, 9:14 AM</p>
+              <br />
+              <p>Dear Valued Customer,</p>
+              <br />
+              <p>
+                We have detected unusual activity on your account that requires
+                your immediate attention. Our security system has identified
+                several login attempts from an unrecognized device.
+              </p>
+              <br />
+              <p>
+                For your protection, we have temporarily limited access to your
+                online banking services. To restore full account access, please
+                verify your identity by following these steps:
+              </p>
+              <br />
+              <p>
+                1.
+                <span class="highlight"
+                  >Click on the secure link below to access our verification
+                  portal:</span
+                ><br />
+                <a href="#" style="color: blue; text-decoration: underline"
+                  >Secure Account Verification</a
+                >
+              </p>
+              <br />
+              <p>
+                2. Confirm your personal information and account details<br />
+                3. Update your security preferences
+              </p>
+              <br />
+              <p>
+                <span class="highlight"
+                  >This process will take approximately 2-3 minutes to complete.
+                  Failure to verify your account within 24 hours may result in a
+                  temporary suspension of your online banking access.</span
+                >
+              </p>
+              <br />
+              <p>
+                NOTE: This is an automated security measure and requires your
+                prompt attention.
+              </p>
+              <br />
+              <p>
+                If you have any questions, please contact our customer service
+                at 1-800-XXX-XXXX.
+              </p>
+              <br />
+              <p>Thank you for your cooperation and for banking with us.</p>
+              <br />
+              <p>
+                Sincerely,<br />
+                Security Department<br />
+                National Banking Services
+              </p>
+
+              <div class="annotation annotation-1">
+                Notice the misspelled domain: using "l" instead of "i" in
+                "nationaIbankservice.com"
+              </div>
+
+              <div class="annotation annotation-2">
+                Creating urgency and fear is a common tactic to push victims
+                into acting without thinking
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tips" class="tips">
+      <div class="container">
+        <div class="section-title">
+          <h2>How to Protect Yourself</h2>
+        </div>
+        <div class="tips-list">
+          <div class="tip-item">
+            <div class="tip-icon">1</div>
+            <div class="tip-content">
+              <h3>Check the Sender's Email Address</h3>
+              <p>
+                Verify the sender's email domain. Banks and legitimate companies
+                use their official domains, not public email services like
+                gmail.com or hotmail.com. Watch for subtle misspellings like
+                "paypaI.com" instead of "paypal.com".
+              </p>
+            </div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-icon">2</div>
+            <div class="tip-content">
+              <h3>Beware of Urgent Requests</h3>
+              <p>
+                Phishing emails often create a false sense of urgency to push
+                you into making quick decisions. Be suspicious of emails
+                claiming "immediate action required" or threatening negative
+                consequences.
+              </p>
+            </div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-icon">3</div>
+            <div class="tip-content">
+              <h3>Hover Before You Click</h3>
+              <p>
+                Hover your cursor over links to see the actual URL before
+                clicking. If the displayed link and the actual URL don't match,
+                or if the URL looks suspicious, don't click it.
+              </p>
+            </div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-icon">4</div>
+            <div class="tip-content">
+              <h3>Never Share Sensitive Information</h3>
+              <p>
+                Legitimate organizations will never ask for passwords, full
+                credit card numbers, or social security numbers via email. When
+                in doubt, contact the organization directly using their official
+                phone number or website.
+              </p>
+            </div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-icon">5</div>
+            <div class="tip-content">
+              <h3>Use Multi-Factor Authentication</h3>
+              <p>
+                Enable multi-factor authentication (MFA) on all your important
+                accounts to provide an extra layer of security even if your
+                password is compromised.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="quiz">
+      <div class="container">
+        <div class="section-title">
+          <h2>Test Your Knowledge</h2>
+        </div>
+        <div class="quiz-container">
+          <div class="quiz-question">
+            <h3>
+              1. Which of the following is a common sign of a phishing email?
+            </h3>
+            <ul class="quiz-options">
+              <li class="quiz-option" onclick="showFeedback(this, true)">
+                An urgent request requiring immediate action
+              </li>
+              <li class="quiz-option" onclick="showFeedback(this, false)">
+                An email from someone you regularly communicate with
+              </li>
+              <li class="quiz-option" onclick="showFeedback(this, false)">
+                A newsletter you've subscribed to
+              </li>
+              <li class="quiz-option" onclick="showFeedback(this, false)">
+                A receipt for a purchase you recently made
+              </li>
+            </ul>
+            <div class="quiz-feedback">
+              Correct! Phishing emails often create a false sense of urgency to
+              pressure you into acting quickly without thinking.
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <h3>
+              2. What should you do if you receive a suspicious email claiming
+              to be from your bank?
+            </h3>
+            <ul class="quiz-options">
+              <li class="quiz-option" onclick="showFeedback(this, false)">
+                Click the link to see if it looks legitimate
+              </li>
+              <li class="quiz-option" onclick="showFeedback(this, false)">
+                Reply to the email asking for verification
+              </li>
+              <li class="quiz-option" onclick="showFeedback(this, true)">
+                Contact your bank directly using their official phone number
+              </li>
+              <li class="quiz-option" onclick="showFeedback(this, false)">
+                Forward the email to a friend to get their opinion
+              </li>
+            </ul>
+            <div class="quiz-feedback">
+              Correct! Always verify suspicious communications by contacting the
+              organization directly through their official channels, not through
+              the contact information provided in the suspicious email.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-links">
+          <a href="#features">What is Phishing</a>
+          <a href="#examples">Examples</a>
+          <a href="#tips">Safety Tips</a>
+          <a href="#quiz">Test Yourself</a>
+        </div>
+        <p>&copy; 2025 PhishGuard - Email Security Awareness</p>
+      </div>
+    </footer>
+
+    <script>
+      function showFeedback(option, isCorrect) {
+        // Reset all options
+        const allOptions = document.querySelectorAll(".quiz-option");
+        allOptions.forEach((opt) => {
+          opt.classList.remove("correct", "incorrect");
+        });
+
+        // Reset all feedback
+        const allFeedback = document.querySelectorAll(".quiz-feedback");
+        allFeedback.forEach((feedback) => {
+          feedback.classList.remove("correct", "incorrect");
+          feedback.style.display = "none";
+        });
+
+        // Show the selected feedback
+        const feedback = option.parentElement.nextElementSibling;
+
+        if (isCorrect) {
+          option.classList.add("correct");
+          feedback.classList.add("correct");
+          feedback.textContent = "Correct! " + feedback.textContent;
+        } else {
+          option.classList.add("incorrect");
+          feedback.classList.add("incorrect");
+          feedback.textContent = "Incorrect. Try again!";
+        }
+
+        feedback.style.display = "block";
+      }
+    </script>
+  </body>
+</html>
