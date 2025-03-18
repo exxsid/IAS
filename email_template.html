@@ -124,10 +124,10 @@
     <div class="email-container">
       <div class="email-header">
         <img
-          src="/api/placeholder/180/60"
-          alt="National Bank Logo"
+          src="images/logo-z.png"
+          alt="TrustBridge Bank Logo"
           class="logo"
-          style="background-color: white; padding: 10px; border-radius: 4px"
+          style="padding: 10px; border-radius: 4px"
         />
       </div>
 
@@ -142,7 +142,8 @@
         <p>
           Our security system has detected
           <strong>multiple login attempts</strong> from an unrecognized device
-          attempting to access your account on March 11, 2025 at 08:14 AM EST.
+          attempting to access your account on
+          <strong id="dateTime"></strong> PHST.
         </p>
 
         <p>
@@ -179,18 +180,13 @@
         </p>
 
         <div class="security-badge">
-          <img
-            src="/api/placeholder/30/30"
-            alt="Secure"
-            style="background-color: #0056b3"
-          />
           <span>SECURE VERIFICATION PORTAL</span>
         </div>
 
         <div class="divider"></div>
 
         <p>
-          <strong>Security Reminder:</strong> National Bank will never ask you
+          <strong>Security Reminder:</strong> TrustBridge Bank will never ask you
           to share your password, PIN, or full card number via email or phone.
         </p>
 
@@ -205,52 +201,32 @@
         <p>
           Sincerely,<br />
           <strong>Security Department</strong><br />
-          National Banking Services
+          TrustBridge Banking Services
         </p>
       </div>
 
       <div class="footer">
-        <p>© 2025 National Banking Services. All rights reserved.</p>
-        <p>123 Financial Street, New York, NY 10001</p>
-        <div class="social-icons">
-          <a href="#"
-            ><img
-              src="/api/placeholder/20/20"
-              alt="Facebook"
-              style="background-color: #1877f2"
-          /></a>
-          <a href="#"
-            ><img
-              src="/api/placeholder/20/20"
-              alt="Twitter"
-              style="background-color: #1da1f2"
-          /></a>
-          <a href="#"
-            ><img
-              src="/api/placeholder/20/20"
-              alt="LinkedIn"
-              style="background-color: #0a66c2"
-          /></a>
-        </div>
-        <p style="margin-top: 10px; font-size: 11px">
-          This email is intended for [customer.email@example.com]. If you
-          received this in error, please delete immediately.
-        </p>
-      </div>
+        <p>© 2025 TrustBridge Banking Services. All rights reserved.</p>
+        <p>7899 Makati Avenue, Makati City, Metro Manila, Philippines</p> 
     </div>
+    <script>
+      function displayDateTime() {
+        const now = new Date();
+        const options = {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        };
+        const formattedDateTime = now.toLocaleString("en-US", options);
+        document.getElementById("dateTime").innerText = formattedDateTime;
+      }
 
-    <div class="educational-notice">
-      <h2 style="color: #c2410c; margin-top: 0">Educational Notice</h2>
-      <p>
-        This is a <strong>simulation</strong> of a phishing email for
-        educational purposes only. Real phishing emails use design elements like
-        these to appear legitimate and trustworthy.
-      </p>
-      <p>
-        Always verify communications by contacting your bank directly through
-        official channels, not through links or contact information provided in
-        emails.
-      </p>
-    </div>
+      // Display the date and time once
+      displayDateTime();
+    </script>
   </body>
 </html>
